@@ -19,3 +19,4 @@ def setup_config(command, filename, section, vars):
     tag1.quotes.append(q1) 
     objectstore.flush()
     
+    print "done populating data..."
