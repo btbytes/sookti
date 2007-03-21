@@ -14,7 +14,8 @@ def setup_config(command, filename, section, vars):
     metadata.connect(conf['dsn'])
     metadata.create_all()
     import time
-    
+    tag1 = Tag(name='default')
     q1 = Quote(content="First they laugh at you...", who="Gandhi")
+    tag1.quotes.append(q1) 
     objectstore.flush()
     
