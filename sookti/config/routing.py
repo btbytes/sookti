@@ -18,6 +18,6 @@ def make_map(global_conf={}, app_conf={}):
     # so they may take precedent over the more generic routes. For more information, refer
     # to the routes manual @ http://routes.groovie.org/docs/
     map.connect(':controller/:action/:id')
-    map.connect('*url', controller='template', action='view')
-
+    map.connect('*url', controller='quote', action='index')
+    
     return map

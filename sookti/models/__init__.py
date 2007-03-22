@@ -2,6 +2,7 @@ from elixir import *
 from sqlalchemy import func
 import time
 from datetime import datetime
+import forms
 
 class Quote(Entity):
     with_fields(

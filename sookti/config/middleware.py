@@ -30,7 +30,9 @@ def make_app(global_conf, full_stack=True, **app_conf):
     # Load our Pylons configuration defaults
     config = load_environment(global_conf, app_conf)
     config.init_app(global_conf, app_conf, package='sookti')
-        
+    makopts = {}
+    config.add_template_engine('mako', 'sookti.templates', makopts)
+    
     # Load our default Pylons WSGI app and make g available
     app = pylons.wsgiapp.PylonsApp(config, helpers=sookti.lib.helpers,
                                    g=app_globals.Globals)
