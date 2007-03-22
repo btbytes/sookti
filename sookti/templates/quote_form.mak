@@ -1,6 +1,6 @@
 <%inherit  file="base.mak" />
 <h2>New Q.</h2>
-${c.form.start(name="form", action=h.url_for(action='quote_form'), method="GET") }
+${c.form.start(name="form", action=h.url_for(action='new'), method="GET") }
 ${c.form.layout.simple_start()}
 
 ${c.form.layout.entry(
@@ -11,13 +11,13 @@ ${c.form.layout.entry(
 
 ${c.form.layout.entry(
     c.form.field.text('who'),
-    name='Who?',
+    name='Who',
     error=c.form.get_error('who')
 )}
 
 ${c.form.layout.entry(
     c.form.field.text('tags'),
-    name='Tags (space seperated)',
+    name='Tags',
     error=c.form.get_error('tags')
 )}
 

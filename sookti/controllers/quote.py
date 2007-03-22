@@ -7,9 +7,7 @@ class QuoteController(BaseController):
     def index(self):        
         return render_response('mako', '/index.mak')
         
-    def new(self):
-        print 'DIR OF MODEL :::::',dir(model)
-        '''
+    def new(self):        
         if len(request.params):
             try:
                 results = model.forms.schema.QuoteFormSchema.to_python(
@@ -24,22 +22,18 @@ class QuoteController(BaseController):
                 return render_response('mako', '/quote_form.mak')
             
             else:
-                c.content = 'content'
-                c.who = 'who?'
+                c.content = request.params['content']
+                c.who = request.params['who']
+                quote = model.Quote()
+                quote.content = c.content
+                quote.who = quote.who
+                quote.flush()
                 return render_response('mako', '/new_success.mak')
             
         else:  
             c.form = model.forms.build.StandardForm()
             return render_response('mako', '/quote_form.mak')
-        '''
-        results, errors, response = formbuild.handle(
-            schema=model.forms.schema.EmailFormSchema(),
-            template='quote_form.myt',
-            form=model.forms.build.StandardForm
-        )
-        if response:
-            return response
-        return Response('mako', '/new_successs.mak')            
+        
         
     def random(self):
         return render_response('mako', '/new.mak')
