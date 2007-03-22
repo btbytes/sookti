@@ -1,5 +1,6 @@
 from sookti.lib.base import *
 import formencode
+import formbuild
 from sookti import models
 
 class QuoteController(BaseController):
