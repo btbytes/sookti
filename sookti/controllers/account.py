@@ -5,6 +5,9 @@ from sookti.models import *
 import datetime
 from logging import basicConfig, DEBUG, INFO, debug, info, warning, error, critical
 basicConfig(level=DEBUG, format="%(levelname)s:%(module)s: %(message)s") # default WARNING
+from sookti.lib.base import *
+from authkit.pylons_adaptors import authorize
+from authkit.permissions import RemoteUser
 
 class AccountController(BaseController):
     def __before__(self):
@@ -45,7 +48,7 @@ class AccountController(BaseController):
             return render_response('mako',"/account_signin.mak")
         user = users[0]
         debug("user=%s" % user)
-        debug("user.group=%s .roles=%s" % (user.group, user.roles))
+        debug("user.group=%s .roles=%s" % (user.groups, user.roles))
         # should this username/password check be done in middleware def valid(environ,username,password)?
         # see auth_tkt.py
         # see doing this in app_globals.py: http://authkit.org/docs/pylons.html
@@ -58,9 +61,5 @@ class AccountController(BaseController):
         self.session.save(user)
         self.session.flush()
         # on success return to referring page
-        redirect_to(request.environ['HTTP_REFERER'])
-    
-    @authorize(RemoteUser())
-    def foo(self):
-        pass
-        
+        #redirect_to(request.environ['HTTP_REFERER'])
+        redirect_to(controller='quote', action='index')

@@ -1,0 +1,81 @@
+body{
+  background: #669;
+  font-family:verdana;
+}
+div#container{
+  margin:7em auto;
+  width: 600px;
+}
+div#container h1{
+  margin:0px;
+  margin-bottom:-5px;
+  color: #ff9;
+  text-align:left;
+}
+div#cfooter{
+  margin-top:3em;
+  font-size: small;
+  text-align:right;
+  width:100%;
+  background:#fee;
+}
+div#quote{
+  border: solid 3px #944;
+  padding: 1em;
+  background: #fff;
+}
+div#quote h2{
+   margin:0px;
+   border-bottom:solid 1px #999;
+   margin-bottom: 1em;   
+}
+
+blockquote {
+display: block;
+padding: 0 60px;
+width: 350px;
+font-family:Arial;
+}
+blockquote:before, blockquote:after {
+color: #69c;
+display: block;
+font-size: 700%;
+width: 50px;
+}
+blockquote:before {
+content: open-quote;
+height: 0;
+margin-left: -0.55em;
+}
+blockquote:after {
+content: close-quote;
+height: 50px;
+margin-top: -70px;   
+margin-left: 360px;
+}
+p.who, p.qctrl{
+margin-right:5em;
+text-align:right;
+}
+
+p.who{
+    
+    margin-bottom:0px;
+}
+p.qct{    
+    background: #ffe;
+    font-size:0.9em;    
+    margin-top:0px;
+    margin-right:5em;
+    width:30%;
+    float:right;
+}
+hr
+{
+  background: #ccc;
+  border: 0;
+  color: #ccc;
+  height: 1px;
+  width:80%;  
+  clear:both;
+}

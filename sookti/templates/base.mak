@@ -1,34 +1,10 @@
 <html>
 <head>
 <title>
-Test Page:Quote
+Sookti: Quotes Page
 </title>
-<style type="text/css">
-body{
-  background: #669;
-  font-family:verdana;
-}
-div#container{
-  margin:7em auto;
-  width: 600px;
-}
-div#container h1{
-  margin:0px;
-  margin-bottom:-5px;
-  color: #ff9;
-  text-align:center;
-}
-div#quote{
-  border: solid 3px #944;
-  padding: 1em;
-  background: #fff;
-}
-div#quote h2{
-   margin:0px;
-   border-bottom:solid 1px #999;
-   margin-bottom: 1em;   
-}
-</style>
+<link href="/quotes.css" type="text/css" rel="stylesheet" />
+<% h.javascript_include_tag('/javascripts/effects.js', builtins=True)  %>
 </head>
 
 <body>
@@ -36,7 +12,28 @@ div#quote h2{
 <h1>Q Server</h1>
 <div id="quote">
 ${ next.body()}
+<div id="cfooter">
+<% remote_user = request.environ.get('REMOTE_USER') %>
+
+<p>
+<span style="text-align:left">
+
+</span>
+% if remote_user:
+(${remote_user}) 
+% endif
+${h.link_to('Home', url=h.url(controller='quote', action='index'))} 
+% if remote_user:
+| ${h.link_to('list', url=h.url(controller='quote', action='list', id=''))} |
+${h.link_to('random', url=h.url(controller='quote', action='random', id=''))}|
+${h.link_to('add new', url=h.url(controller='quote', action='edit', id=''))}|
+${h.link_to('sign out', url=h.url(controller='account', action='signout', id=''))}.
+% endif
+
+
+</p>
 </div>
+</div><!-- quote -->
 </div><!-- container -->
 </body>
 </html>

@@ -13,7 +13,7 @@ class BaseController(WSGIController):
         # Insert any code to be run per request here. The Routes match
         # is under environ['pylons.routes_dict'] should you want to check
         # the action or route vars here
-        model.metadata.connect(request.environ['paste.config']['app_conf']['dsn'])
+        model.metadata.connect(request.environ['paste.config']['app_conf']['sqlalchemy.dburi'])
         objectstore.clear()
         return WSGIController.__call__(self, environ, start_response)
 

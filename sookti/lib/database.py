@@ -1,7 +1,7 @@
 engine = None
 import sqlalchemy
 from sqlalchemy.ext.sessioncontext import SessionContext
-from sookti.models import metadatadata
+from sookti.models import metadata
 from paste.deploy.converters import asbool
 
 def get_engine():
