@@ -25,7 +25,9 @@ class Globals(object):
             your global variables.
             
         """
-        pass
+        from sookti.lib.database import session_context
+        self.session = session_context.current
+        self.session.clear()
         
     def __del__(self):
         """
@@ -33,3 +35,16 @@ class Globals(object):
         here.
         """
         pass
+
+    def valid(self,environ, username, password):
+        users = self.session.query(User).select_by(username=username)
+        print "app_globals.valid users=%s" % users
+        if len(users) > 1:
+            print "app_globals.valid More than one user in database with username=%s found" % username
+            return False
+        elif not users:
+            print "app_globals.valid No such user %s" % username
+            return False
+        if password == users[0].password:
+            return True
+        return False

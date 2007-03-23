@@ -52,6 +52,8 @@ def make_app(global_conf, full_stack=True, **app_conf):
     
         # Error Handling
         app = ErrorHandler(app, global_conf, error_template=error_template, **config.errorware)
+        import authkit.authenticate
+        app = authkit.authenticate.middleware(app, config_paste=app_conf, signin='/account/signin')
     
         # Display error documents for 401, 403, 404 status codes (if debug is disabled also
         # intercepts 500)
