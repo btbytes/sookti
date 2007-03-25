@@ -17,16 +17,17 @@ class QuoteController(BaseController):
     def __before__(self):
         self.session = session_context.current
         self.session.clear()            # remove stale info
-        
-    @authorize(RemoteUser())    
+
     def index(self):
         c.quote = self.session.query(Quote).order_by([desc(Quote.c.ts_created)])[0]    
-        return render_response('mako', '/index.mak')       
+        return render_response('mako', '/index.mak')
+        
         
     def view(self,id):
         c.quote = self.session.query(Quote).select_by(Quote.c.id==id)[0]    
-        return render_response('mako', '/index.mak')       
-        
+        return render_response('mako', '/index.mak')
+    
+    @authorize(RemoteUser())            
     def edit(self,id):        
         if len(request.params):
             try:
@@ -68,7 +69,8 @@ class QuoteController(BaseController):
                 c.form = model.forms.build.StandardForm(                    
                     )
             return render_response('mako', '/quote_form.mak')       
-    
+        
+    @authorize(RemoteUser())
     def delete(self,id):
         quote = model.Quote.get_by(id=id)          
         quote.delete()

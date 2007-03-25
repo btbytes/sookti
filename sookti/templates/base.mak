@@ -22,15 +22,18 @@ ${ next.body()}
 % if remote_user:
 (${remote_user}) 
 % endif
-${h.link_to('Home', url=h.url(controller='quote', action='index'))} 
-% if remote_user:
-| ${h.link_to('list', url=h.url(controller='quote', action='list', id=''))} |
+${h.link_to('Home', url=h.url(controller='quote', action='index'))}|
 ${h.link_to('random', url=h.url(controller='quote', action='random', id=''))}|
+${h.link_to('list', url=h.url(controller='quote', action='list', id=''))} |
+
+% if remote_user:
 ${h.link_to('add new', url=h.url(controller='quote', action='edit', id=''))}|
-${h.link_to('sign out', url=h.url(controller='account', action='signout', id=''))}.
+${h.link_to('sign out', url=h.url(controller='account', action='signout',
+id=''))}.
+% else:
+${h.link_to('sign in', url=h.url(controller='account', action='signin',
+id=''))}.
 % endif
-
-
 </p>
 </div>
 </div><!-- quote -->
