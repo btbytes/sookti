@@ -9,7 +9,7 @@ Sookti: Quotes Page
 
 <body>
 <div id="container">
-<h1>Q Server</h1>
+<h1>Sookti - the Quote Server</h1>
 <div id="quote">
 ${ next.body()}
 <div id="cfooter">

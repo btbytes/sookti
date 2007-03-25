@@ -14,7 +14,7 @@ def setup_config(command, filename, section, vars):
     
     metadata.connect(conf['sqlalchemy.dburi'])
     
-    metadata.drop_all(checkfirst=False)
+    #metadata.drop_all(checkfirst=False)
     metadata.create_all()
     
     

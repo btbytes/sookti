@@ -1,9 +1,13 @@
 body{
-  background: #669;
+  background: #696;
   font-family:verdana;
 }
 div#container{
-  margin:7em auto;
+  margin:0em 7em auto;
+ /*
+  margin-top:0px;
+  margin-bottom:0px;
+*/
   width: 600px;
 }
 div#container h1{

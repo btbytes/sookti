@@ -1,10 +1,12 @@
 from elixir import *
 from sqlalchemy import func, DynamicMetaData
-import time
+import time, datetime
 from datetime import datetime
 import forms
 
 metadata = DynamicMetaData()
+
+
 
 class Quote(Entity):
     using_options(tablename='sookti_quotes')
@@ -13,17 +15,20 @@ class Quote(Entity):
         who = Field(Unicode(40)),
         lang = Field(String(10), default='English'),
         ts_created = Field(DateTime, default=func.now()),
-        ts_updated = Field(DateTime, onupdate=func.now())
-    )    
+        ts_updated = Field(TIMESTAMP(timezone=True), onupdate=func.now())
+    )
     has_and_belongs_to_many('tags', of_kind='Tag', inverse='quotes')
+    
     def __repr__(self):
         return '<Quote %s -- %s>' % (self.content[:20], self.who)
-
+    def now():
+        return datetime.now(self.ts_updated.tzinfo)
+    
 class Tag(Entity):
     using_options(tablename='sookti_tags')
     with_fields(
         name = Field(Unicode(40))
-    )    
+    )
     has_and_belongs_to_many('quotes', of_kind='Quote', inverse='tags')
     
     def __repr__(self):
@@ -62,8 +67,8 @@ class User(Entity):
         password  = Field(String(255)),
         email     = Field(String(255)),
         fullanme  = Field(Unicode(255)), 
-        lastlogin = Field(DateTime, onupdate=func.now()),
-        created   = Field(DateTime, default=func.now())
+        lastlogin = Field(TIMESTAMP(timezone=True), onupdate=func.now()),
+        created   = Field(TIMESTAMP(timezone=True), default=func.now())
     )
     has_and_belongs_to_many('groups', of_kind='Group', inverse='users')
     has_and_belongs_to_many('roles', of_kind='Role', inverse='users')

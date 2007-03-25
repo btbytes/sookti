@@ -10,10 +10,12 @@
   </blockquote>
   <p class="who">${quote.who}</p>
   <p class="qct">
-  % if remote_user:
+<% remote_user = request.environ.get('REMOTE_USER') %>
+
+% if remote_user:
     ${ h.link_to('edit', url=h.url(action='edit', id=quote.id)) }|
     ${ h.link_to("delete", url=h.url(action='delete', id=quote.id), confirm="Are you sure?") }.
-  % endif
+% endif
   </p> 
   <hr/>  
 </%def>
