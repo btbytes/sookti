@@ -11,6 +11,9 @@ Sookti: Quotes Page
 <div id="container">
 <h1>Sookti - the Quote Server</h1>
 <div id="quote">
+% if c.message:
+ <h2>  ${c.message} </h2>
+% endif
 ${ next.body()}
 <div id="cfooter">
 <% remote_user = request.environ.get('REMOTE_USER') %>

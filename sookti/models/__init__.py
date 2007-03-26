@@ -21,18 +21,28 @@ class Quote(Entity):
     
     def __repr__(self):
         return '<Quote %s -- %s>' % (self.content[:20], self.who)
+
+    def __str__(self):
+        return '%s... -- %s' % (self.content[:20], self.who)
+    
     def now():
         return datetime.now(self.ts_updated.tzinfo)
     
 class Tag(Entity):
     using_options(tablename='sookti_tags')
     with_fields(
-        name = Field(Unicode(40))
+        name = Field(Unicode(40), unique=True, nullable=False)
     )
     has_and_belongs_to_many('quotes', of_kind='Quote', inverse='tags')
-    
+
+    def __init__(self, name):
+        self.name = name
+        
     def __repr__(self):
-        return '<Tag "%s">' % self.name
+        return self.name
+    
+    def __str__(self):
+        return self.name
     
 class Group(Entity):
     using_options(tablename='sookti_group')

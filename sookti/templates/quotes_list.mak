@@ -9,6 +9,11 @@
   <p class="quote">${quote.content}</p>
   </blockquote>
   <p class="who">${quote.who}</p>
+  <p class="tags">
+%  for tag in quote.tags:
+   ${ h.link_to(tag, url=h.url(action='tag', id=tag)) }, 
+%  endfor
+  </p>
   <p class="qct">
 <% remote_user = request.environ.get('REMOTE_USER') %>
 

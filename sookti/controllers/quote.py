@@ -28,7 +28,7 @@ class QuoteController(BaseController):
         return render_response('mako', '/index.mak')
     
     @authorize(RemoteUser())            
-    def edit(self,id):        
+    def edit(self,id):
         if len(request.params):
             try:
                 results = model.forms.schema.QuoteFormSchema.to_python(
@@ -39,31 +39,43 @@ class QuoteController(BaseController):
             except formencode.Invalid, e:
                 c.form = model.forms.build.StandardForm(
                     dict(request.params),
-                    e.error_dict or {}
+                   e.error_dict or {}
                 )
-                return render_response('mako', '/quote_form.mak')
-            
+                return render_response('mako', '/quote_form.mak')            
             else:
                 quote = model.Quote.get_by(id=id)
                 if not quote:
                     quote = model.Quote()
                 c.content = request.params['content']
-                c.who = request.params['who']                  
+                c.who = request.params['who']
+                c.tags = request.params['tags']
                 quote.content = c.content
                 quote.who = c.who
-                quote.flush()                                    
+                for tag in c.tags.split(','):
+                    if len(tag)>1:
+                        try:                            
+                            t = model.Tag(tag.strip())
+                            t.flush()
+                            print '$'*40, t, quote.tags
+                            if t not in quote.tags:
+                                quote.tags.append(t)
+                                quote.flush()                                
+                        except:
+                            pass
+                quote.flush()
                 redirect_to(action="index")
                 
         else:
-            quote = model.Quote.get_by(id=id)  
+            quote = model.Quote.get_by(id=id)
             if quote:
                 data = {'content': quote.content,
                     'who':quote.who,
                     'ts_created': quote.ts_created,
-                    'ts_updated': quote.ts_updated,                        
-                    }    
-                c.form = model.forms.build.StandardForm( 
-                        dict(data)                
+                    'ts_updated': quote.ts_updated,
+                    'tags': ','.join([str(tag) for tag in quote.tags]),
+                    }
+                c.form = model.forms.build.StandardForm(
+                        dict(data)
                     )
             else:
                 c.form = model.forms.build.StandardForm(                    
@@ -82,8 +94,13 @@ class QuoteController(BaseController):
         c.quote = self.session.query(Quote).order_by(func.random())[0]
         return render_response('mako', '/index.mak')
         
-    def tag(self):
-        return render_response('mako', '/tag.mak')
+    def tag(self,id):
+        c.tag = id
+        print '*'*30, dir(model.Quote)
+        tag = self.session.query(Tag).get_by(Tag.c.name==id)
+        c.quotes = tag.quotes
+        c.message = 'Quotes tagged with %s' % tag
+        return render_response('mako', '/quotes_list.mak')
     
     def leaf(self,id):
         return render_response('mako', '/leaf.mak')
