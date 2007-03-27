@@ -73,16 +73,38 @@ class Role(Entity):
 class User(Entity):
     using_options(tablename='sookti_user')
     with_fields(
-        username  = Field(String(50), unique=True, nullable=False),
-        password  = Field(String(255)),
-        email     = Field(String(255)),
-        fullanme  = Field(Unicode(255)), 
-        lastlogin = Field(TIMESTAMP(timezone=True), onupdate=func.now()),
-        created   = Field(TIMESTAMP(timezone=True), default=func.now())
+        username   = Field(String(50), unique=True, nullable=False),
+        password   = Field(String(255)),
+        email      = Field(String(255)),
+        fullaname  = Field(Unicode(255)), 
+        lastlogin  = Field(TIMESTAMP(timezone=True), onupdate=func.now()),
+        created    = Field(TIMESTAMP(timezone=True), default=func.now())        
     )
     has_and_belongs_to_many('groups', of_kind='Group', inverse='users')
     has_and_belongs_to_many('roles', of_kind='Role', inverse='users')
     
     def __repr__(self):
         return '<Tag "%s">' % self.username
+
+
+class RegistrationProfile(Entity):
+    using_options(tablename='sookti_registration_profile')
+    with_fields(
+        activation_key = Field(String(40)),
+        key_generated  = Field(TIMESTAMP(timezone=True), default=func.now())
+    )
+    belongs_to('user', of_kind='User')
     
+    def __str__(self):
+        return "User Profile for %s " % self.username
+    
+    def activation_key_expired(self):
+        """
+        Determines whether this Profile's activation key has expired,
+        based on the value of the setting ``ACCOUNT_ACTIVATION_DAYS``.
+        
+        """
+        pass
+        expiration_date = datetime.timedelta(days=7)
+        return self.key_generated + expiration_date <= datetime.datetime.now()
+        

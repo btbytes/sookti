@@ -83,3 +83,9 @@ hr
   width:80%;  
   clear:both;
 }
+
+.portal_message{
+	background: #ffd;
+	border-top: #ff9 solid 1px;
+	border-bottom: #ff9 solid 1px;
+}

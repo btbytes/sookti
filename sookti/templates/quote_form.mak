@@ -1,6 +1,6 @@
 <%inherit  file="base.mak" />
 <h2>Quote editor</h2>
-${c.form.start(name="form", action=h.url_for(action='edit'), method="GET") }
+${c.form.start(name="form", action=h.url_for(action='edit'), method="POST") }
 ${c.form.layout.simple_start()}
 
 ${c.form.layout.entry(

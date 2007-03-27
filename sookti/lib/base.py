@@ -15,8 +15,17 @@ class BaseController(WSGIController):
         # the action or route vars here
         model.metadata.connect(request.environ['paste.config']['app_conf']['sqlalchemy.dburi'])
         objectstore.clear()
+        if session.has_key('flash'):
+            c.flash = session['flash']
+            del session['flash']
+            session.save()            
         return WSGIController.__call__(self, environ, start_response)
-
+        
+    def flash(self, message):
+        session['flash'] = message
+        session.save()
 # Include the '_' function in the public names
 __all__ = [__name for __name in locals().keys() if not __name.startswith('_') \
            or __name == '_']
+           
+    

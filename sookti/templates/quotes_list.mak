@@ -1,8 +1,15 @@
 <%inherit  file="base.mak" />
+
 % for quote in c.quotes:  
   ${print_quote(quote)}
 % endfor
 
+${self.list_footer()}
+
+
+<%def name="list_footer()" >
+  <!-- list footer Eg: pagination etc... -->
+</%def>
 
 <%def name="print_quote(quote)">
   <blockquote>

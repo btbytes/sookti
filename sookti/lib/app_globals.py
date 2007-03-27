@@ -27,7 +27,7 @@ class Globals(object):
         """
         from sookti.lib.database import session_context
         self.session = session_context.current
-        self.session.clear()
+        self.session.clear()       
         
     def __del__(self):
         """
