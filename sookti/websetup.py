@@ -24,6 +24,13 @@ def setup_config(command, filename, section, vars):
     tag1.quotes.append(q1)    
     tag2 = Tag(name='learning')
     q2 = Quote(content="Live as if you were to die tomorrow. Learn as if you were to live forever.", who="Mahatma Gandhi")    
+    tag2.quotes.append(q2)
+    tag3 = Tag(name='humour')
+    q3 = Quote(content="In the beginning the Universe was created. This has made a lot of people very angry and has been widely regarded as a bad move.", who="Douglas Adams")
+    tag3.quotes.append(q3)
+    tag4 = Tag(name='science')
+    q4 = Quote(content="I'll never make that mistake again, reading the experts' opinions. Of course, you only live one life, and you make all your mistakes, and learn what not to do, and that's the end of you.", who="Richard Feynman")
+    tag4.quotes.append(q4)
     print "Adding users.... user 'admin' with role 'admin' ..."    
     print "Add group..."
     g = Group('everyone')    

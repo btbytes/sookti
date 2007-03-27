@@ -93,8 +93,7 @@ class QuoteController(BaseController):
                         t.flush()                                               
                     if t not in quote.tags:
                         quote.tags.append(t)
-                quote.flush()
-                self.flash("Created new...")                
+                quote.flush()                           
                 redirect_to(action="view", id=quote.id)
                 
         else:

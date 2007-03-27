@@ -13,11 +13,11 @@ div#container{
 div#container h1{
   margin:0px;
   margin-bottom:-5px;
-  color: #ff9;
+  color: #900;
   text-align:left;
 }
 div#cfooter{
-  margin-top:3em;
+  margin:0em;
   font-size: small;
   text-align:right;
   width:100%;
@@ -89,3 +89,8 @@ hr
 	border-top: #ff9 solid 1px;
 	border-bottom: #ff9 solid 1px;
 }
+
+.tags{
+	text-align:right;
+	
+	}

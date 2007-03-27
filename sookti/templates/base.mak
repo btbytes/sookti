@@ -9,16 +9,8 @@ Sookti: Quotes Page
 
 <body>
 <div id="container">
-<h1>Q Server</h1>
 <div id="quote">
-% if c.flash:
- <p class="portal_message">  ${c.flash} </p>
-% endif
-% if c.message:
- <p>  ${c.message} </p>
-% endif
-
-${ next.body()}
+<h1>Q Server</h1>
 <div id="cfooter">
 <% remote_user = request.environ.get('REMOTE_USER') %>
 
@@ -29,7 +21,7 @@ ${ next.body()}
 % if remote_user:
 (${remote_user}) 
 % endif
-${h.link_to('Home', url=h.url(controller='quote', action='index'))}|
+${h.link_to('Home', url=h.url(controller='quote', action='index',id=''))}|
 ${h.link_to('random', url=h.url(controller='quote', action='random', id=''))}|
 ${h.link_to('list', url=h.url(controller='quote', action='page', id=''))} |
 
@@ -43,6 +35,15 @@ id=''))}.
 % endif
 </p>
 </div>
+
+% if c.flash:
+ <p class="portal_message">  ${c.flash} </p>
+% endif
+% if c.message:
+ <p>  ${c.message} </p>
+% endif
+
+${ next.body()}
 </div><!-- quote -->
 </div><!-- container -->
 </body>
