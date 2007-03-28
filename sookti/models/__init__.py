@@ -74,7 +74,7 @@ class User(Entity):
     using_options(tablename='sookti_user')
     with_fields(
         username   = Field(String(50), unique=True, nullable=False),
-        password   = Field(String(255)),
+        password   = Field(BLOB(255)),
         email      = Field(String(255)),
         fullaname  = Field(Unicode(255)), 
         lastlogin  = Field(TIMESTAMP(timezone=True), onupdate=func.now()),
